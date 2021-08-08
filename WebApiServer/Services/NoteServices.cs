@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FirstWebApp.Models;
-using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using WebApiServer.Models;
 
