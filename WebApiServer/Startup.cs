@@ -22,11 +22,11 @@ namespace WebApiServer
         public void ConfigureServices(IServiceCollection services)
         {
             // requires using Microsoft.Extensions.Options
-            services.Configure<NotesDatabaseSettings>(
-                Configuration.GetSection(nameof(NotesDatabaseSettings)));
+            services.Configure<DatabaseSettings>(
+                Configuration.GetSection(nameof(DatabaseSettings)));
 
-            services.AddSingleton<INotesDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<NotesDatabaseSettings>>().Value);
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddSingleton<NoteService>();
 
