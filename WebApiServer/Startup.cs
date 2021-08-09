@@ -1,3 +1,4 @@
+using FirstWebApp.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +29,9 @@ namespace WebApiServer
             services.AddSingleton<IDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
-            services.AddSingleton<NoteService>();
+            services.AddSingleton<NoteServices>();
+            services.AddSingleton<ProductServices>();
+            services.AddSingleton<OrderServices>();
 
             services.AddControllers();
         }

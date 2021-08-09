@@ -13,21 +13,21 @@ namespace WebApiServer.Controllers
     [ApiController]
     public class NotesController : ControllerBase
     {
-        private readonly NoteService _noteService;
+        private readonly NoteServices _crudService;
 
-        public NotesController(NoteService noteService)
+        public NotesController(NoteServices noteService)
         {
-            _noteService = noteService;
+            _crudService = noteService;
         }
 
         [HttpGet]
         public ActionResult<List<Note>> Get() =>
-            _noteService.Get();
+            _crudService.Get();
 
         [HttpGet("{id:length(24)}", Name = "GetNote")]
         public ActionResult<Note> Get(string id)
         {
-            var note = _noteService.Get(id);
+            var note = _crudService.Get(id);
 
             if (note == null)
             {
@@ -40,7 +40,7 @@ namespace WebApiServer.Controllers
         [HttpPost]
         public ActionResult<Note> Create(Note note)
         {
-            _noteService.Create(note);
+            _crudService.Create(note);
 
             return CreatedAtRoute("GetNote", new { id = note.Id.ToString() }, note);
         }
@@ -48,14 +48,14 @@ namespace WebApiServer.Controllers
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, Note noteIn)
         {
-            var note = _noteService.Get(id);
+            var note = _crudService.Get(id);
 
             if (note == null)
             {
                 return NotFound();
             }
 
-            _noteService.Update(id, noteIn);
+            _crudService.Update(id, noteIn);
 
             return NoContent();
         }
@@ -63,14 +63,14 @@ namespace WebApiServer.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            var note = _noteService.Get(id);
+            var note = _crudService.Get(id);
 
             if (note == null)
             {
                 return NotFound();
             }
 
-            _noteService.Remove(note);
+            _crudService.Remove(note);
 
             return NoContent();
         }
