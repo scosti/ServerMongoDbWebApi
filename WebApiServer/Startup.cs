@@ -32,6 +32,7 @@ namespace WebApiServer
             services.AddSingleton<NoteServices>();
             services.AddSingleton<ProductServices>();
             services.AddSingleton<OrderServices>();
+            services.AddSingleton<UserServices>();
 
             services.AddControllers();
         }
