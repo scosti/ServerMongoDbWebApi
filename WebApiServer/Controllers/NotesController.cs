@@ -24,10 +24,10 @@ namespace WebApiServer.Controllers
         public ActionResult<List<Note>> Get() =>
             _crudService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetNote")]
-        public ActionResult<Note> Get(string id)
+        [HttpGet("{name}", Name = "GetNote")]
+        public ActionResult<Note> Get(string name)
         {
-            var note = _crudService.Get(id);
+            var note = _crudService.Get(name);
 
             if (note == null)
             {

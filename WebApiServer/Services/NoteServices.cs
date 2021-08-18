@@ -11,8 +11,8 @@ namespace WebApiServer.Services
         {
         }
 
-        public Note Get(string id) =>
-            _collection.Find<Note>(note => note.Id.ToString() == id).FirstOrDefault();
+        public Note Get(string name) =>
+            _collection.Find<Note>(note => note.Name == name).FirstOrDefault();
 
         public void Update(string id, Note noteIn) =>
             _collection.ReplaceOne(note => note.Id.ToString() == id, noteIn);
