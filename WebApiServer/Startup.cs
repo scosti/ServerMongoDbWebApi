@@ -18,10 +18,20 @@ namespace WebApiServer
         }
 
         public IConfiguration Configuration { get; }
-
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:5001", "http://localhost:8100", "http://localhost:8200");
+                    });
+            });
+
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
 
@@ -48,6 +58,8 @@ namespace WebApiServer
             {
                 c.SerializeAsV2 = true;
             });
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
